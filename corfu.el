@@ -444,6 +444,9 @@ FRAME is the existing frame."
       (set-window-parameter win 'no-other-window t)
       ;; Mark window as dedicated to prevent frame reuse (#60)
       (set-window-dedicated-p win t))
+    ;; Reuse the parents default face height.
+    (set-face-attribute 'default frame
+                        :height (face-attribute 'default :height parent t))
     ;; XXX HACK: Child frame popup behavior improved on Emacs 29.
     ;; It seems we may not need the Emacs 27/28 hacks anymore.
     (if (eval-when-compile (< emacs-major-version 29))
